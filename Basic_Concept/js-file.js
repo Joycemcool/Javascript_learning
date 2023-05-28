@@ -42,9 +42,19 @@ container.appendChild(button);
 // function buttonFunction() {
 //     meTooText.textContent = "play";
 // }
+
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        alert(button.id);
+    });
+});
+
 const buttonFunctionArrow = () => meTooText.textContent = "Arrowplay";
 // button.addEventListener('click',buttonFunction);
 button.addEventListener('click',buttonFunctionArrow);
+
 
 // button.onclick=buttonFunction;
 
