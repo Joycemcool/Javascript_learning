@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript DOM Manipulation Exercise</title>
+    <script src="javascript.js" defer></script>
+
+</head>
+<!-- DOM manipulation skills -->
+<body>
+    <style>
+        #container {
+            display: grid;
+            grid-template-columns: repeat(16, 1fr);
+            grid-template-rows: repeat(16, 1fr);
+            gap: 1px;
+        }
+        .square{
+            background-color: blueviolet;
+        }
+        /* .square:hover {
+            background-color: rgb(181, 149, 42);
+        } */
+    </style>
+        <h1>
+            Javascript DOM Manipulation Assignment
+        </h1>
+        <div id="container">
+
+        </div>
+
+        <script>
+            const body = document.querySelector('body');
+        
+
+            const form = document.createElement('form');
+            form.id = 'numberForm';
+
+            const label1 = document.createElement('label');
+            label1.htmlFor = 'numberInput';
+            label1.textContent = 'Enter a row number:';
+
+            const input1 = document.createElement('input');
+            input1.type = 'number';
+            input1.id = 'numberInput';
+            input1.required = true;
+
+            const label2 = document.createElement('label');
+            label2.htmlFor = 'numberInput';
+            label2.textContent = 'Enter a column number:';
+
+            const input2 = document.createElement('input');
+            input2.type = 'number';
+            input2.id = 'numberInput';
+            input2.required = true;
+
+            const submitBtn = document.createElement('button');
+            submitBtn.type = 'submit';
+            submitBtn.textContent = 'Submit'
+
+            form.appendChild(label1);
+            form.appendChild(label2);
+            form.appendChild(input1);
+            form.appendChild(input2);
+            form.appendChild(submitBtn);
+            body.appendChild(form);
+            
+            // const newDiv = document.createElement('div');
+            // let row, column;
+            // function userSubmit (){
+
+            // }
+            const parentElement = document.querySelector('#container');
+            for (let i = 0; i < 16 * 16; i++) {
+                const newDiv = document.createElement('div');
+                newDiv.textContent = `New ${i}`;
+                newDiv.className = 'square';
+                parentElement.appendChild(newDiv);   
+                // const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+                // newDiv.addEventListener('mouseover', () => {
+                //     newDiv.style.backgroundColor = randomColor;
+                // }); 
+
+                // newDiv.addEventListener('mouseout', () => {
+                //     newDiv.style.backgroundColor = '';
+                // });           
+            }
+
+            const allDivs = document.querySelectorAll('.square');
+
+            allDivs.forEach(div => {
+                const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+                console.log(div);
+                div.addEventListener('mouseover', ()=>{
+                div.style.backgroundColor = randomColor;
+            });
+            
+                div.addEventListener('mouseout', ()=>{
+                div.style.backgroundColor ='';
+                });
+            });
+
+            
+        </script>
+        
+</body>
+</html>
