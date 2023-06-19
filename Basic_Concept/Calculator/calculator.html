@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<body>
+
+    <!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator</title>
+  <style>
+    .container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);  
+      grid-gap: 10px;
+      width: 200px;
+      margin: auto;
+      background-color: #f1f1f1;
+    }
+
+    #result {
+      grid-column: 1 / span 4;
+      padding: 10px;
+      text-align: right;
+      background-color: #fff;   
+    }
+
+    .AC {
+      grid-column: 1 / span 2;
+    }
+
+    .equal {
+        grid-column: 3 / span 2;
+
+    }
+
+    input[type="button"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 5px;
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="container">
+        <input type="text" id="result" readonly>
+
+        <input type="button" class="AC" value="AC" onclick="clearResult()">
+        <input type="button" value="DEL" onclick="clearResult()">
+        <input type="button" value="&divide" onclick="addToResult('/')">
+
+        <input type="button" value="1" onclick="addToResult('1')">
+        <input type="button" value="2" onclick="addToResult('2')">
+        <input type="button" value="3" onclick="addToResult('3')">
+        <input type="button" value="*" onclick="addToResult('*')">    
+
+        <input type="button" value="4" onclick="addToResult('4')">
+        <input type="button" value="5" onclick="addToResult('5')">
+        <input type="button" value="6" onclick="addToResult('6')">
+        <input type="button" value="+" onclick="addToResult('+')">
+
+        <input type="button" value="7" onclick="addToResult('7')">
+        <input type="button" value="8" onclick="addToResult('8')">
+        <input type="button" value="9" onclick="addToResult('9')">
+        <input type="button" value="-" onclick="addToResult('-')">
+
+        <input type="button" value="0" onclick="addToResult('0')">
+        <input type="button" value="." onclick="addToResult('.')">
+        <input type="button"  class="equal" value="=" onclick="calculate()">
+
+</div>
+
+  <script>
+    function addToResult(value) {
+      document.getElementById('result').value += value;
+    }
+
+    function calculate() {
+      try {
+        const result = eval(document.getElementById('result').value);
+        document.getElementById('result').value = result;
+      } catch (error) {
+        document.getElementById('result').value = 'Error';
+      }
+    }
+
+    function clearResult() {
+      document.getElementById('result').value = '';
+    }
+  </script>
+</body>
+</html>
+
+    
+</body>
+</html>
