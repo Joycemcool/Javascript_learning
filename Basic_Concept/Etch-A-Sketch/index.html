@@ -13,8 +13,10 @@
     <style>
         #container {
             display: grid;
-            grid-template-columns: repeat(16, 1fr);
-            grid-template-rows: repeat(16, 1fr);
+            width: 300px; 
+            height: 300px;
+            /* grid-template-columns: repeat(16, 1fr);
+            grid-template-rows: repeat(16, 1fr);  */
             gap: 1px;
         }
         .square{
@@ -27,57 +29,88 @@
         <h1>
             Javascript DOM Manipulation Assignment
         </h1>
+        <div class="user-input">
+            <label for="numberInput">Row Number</label>
+            <br>
+            <input type="number" id="number1">
+            <br>
+
+            <label for="numberInput"><Col></Col> Number</label>
+            <br>
+
+            <input type="number" id="number2">
+            <br>
+
+            <button onclick="createGrid()">Submit</button>
+        </div>
         <div id="container">
 
         </div>
 
         <script>
-            const body = document.querySelector('body');
-        
+            // const userInput = document.querySelector('.user-input');
+            // const form = document.createElement('form');
+            // form.id = 'numberForm';
 
-            const form = document.createElement('form');
-            form.id = 'numberForm';
+            // const label1 = document.createElement('label');
+            // label1.htmlFor = 'numberInput';
+            // label1.textContent = 'Enter a row number:';
 
-            const label1 = document.createElement('label');
-            label1.htmlFor = 'numberInput';
-            label1.textContent = 'Enter a row number:';
+            // const input1 = document.createElement('input');
+            // input1.type = 'number';
+            // input1.id = 'number1';
+            // input1.required = true;
 
-            const input1 = document.createElement('input');
-            input1.type = 'number';
-            input1.id = 'numberInput';
-            input1.required = true;
+            // const label2 = document.createElement('label');
+            // label2.htmlFor = 'numberInput';
+            // label2.textContent = 'Enter a column number:';
 
-            const label2 = document.createElement('label');
-            label2.htmlFor = 'numberInput';
-            label2.textContent = 'Enter a column number:';
+            // const input2 = document.createElement('input');
+            // input2.type = 'number';
+            // input2.id = 'number2';
+            // input2.required = true;
 
-            const input2 = document.createElement('input');
-            input2.type = 'number';
-            input2.id = 'numberInput';
-            input2.required = true;
+            // const submitBtn = document.createElement('button');
+            // submitBtn.type = 'submit';
+            // submitBtn.textContent = 'Submit'
 
-            const submitBtn = document.createElement('button');
-            submitBtn.type = 'submit';
-            submitBtn.textContent = 'Submit'
+            // form.appendChild(label1);
+            // form.appendChild(input1);
+            // form.appendChild(label2);
+            // form.appendChild(input2);
+            // form.appendChild(submitBtn);
+            // userInput.appendChild(form);
 
-            form.appendChild(label1);
-            form.appendChild(label2);
-            form.appendChild(input1);
-            form.appendChild(input2);
-            form.appendChild(submitBtn);
-            body.appendChild(form);
+            // const formElements = form.querySelectorAll('*');
+            // formElements.forEach( element => {
+            //     form.appendChild(element);
+            //     form.appendChild(document.createElement("br"));
+            //     form.appendChild(document.createElement("br"));
+            // });
+
             
-            // const newDiv = document.createElement('div');
-            // let row, column;
-            // function userSubmit (){
+            let row=16, col=16;
+            console.log("log");
+            
 
-            // }
-            const parentElement = document.querySelector('#container');
-            for (let i = 0; i < 16 * 16; i++) {
-                const newDiv = document.createElement('div');
-                newDiv.textContent = `New ${i}`;
-                newDiv.className = 'square';
-                parentElement.appendChild(newDiv);   
+
+            function createGrid(num1,num2){
+                console.log("log2");
+                num1 = document.getElementById('number1').value;
+                num2 = document.getElementById('number2').value;
+                console.log(num1);
+                console.log(num2);
+
+                const parentElement = document.querySelector('#container');
+                parentElement.style.gridTemplateColumns = `repeat(${num1}, 1fr)`;
+                parentElement.style.gridTemplateRows = `repeat(${num2}, 1fr)`;
+
+
+                for (let i = 0; i < num1 * num2; i++) {
+                    const newDiv = document.createElement('div');
+                    newDiv.textContent = `New ${i}`;
+                    newDiv.className = 'square';
+                    parentElement.appendChild(newDiv);   
                 // const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
                 // newDiv.addEventListener('mouseover', () => {
                 //     newDiv.style.backgroundColor = randomColor;
@@ -86,23 +119,23 @@
                 // newDiv.addEventListener('mouseout', () => {
                 //     newDiv.style.backgroundColor = '';
                 // });           
-            }
+                    }
 
-            const allDivs = document.querySelectorAll('.square');
+                const allDivs = document.querySelectorAll('.square');
 
-            allDivs.forEach(div => {
-                const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-                console.log(div);
-                div.addEventListener('mouseover', ()=>{
-                div.style.backgroundColor = randomColor;
-            });
+                allDivs.forEach(div => {
+                    const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+                    // console.log(div);
+                    div.addEventListener('mouseover', ()=>{
+                    div.style.backgroundColor = randomColor;
+                });15
             
                 div.addEventListener('mouseout', ()=>{
                 div.style.backgroundColor ='';
                 });
-            });
-
-            
+                });       
+            }
+            createGrid(16, 16);
         </script>
         
 </body>
