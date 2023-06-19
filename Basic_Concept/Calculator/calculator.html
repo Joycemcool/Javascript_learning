@@ -12,20 +12,58 @@
 <head>
   <title>Calculator</title>
   <style>
-    .container {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);  
-      grid-gap: 10px;
-      width: 200px;
-      margin: auto;
-      background-color: #f1f1f1;
+    *, *::before, *::after {
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: normal;
     }
 
-    #result {
-      grid-column: 1 / span 4;
+    body {
+        /* padding: 0;
+        margin: 0; */
+        background-image:url("https://plus.unsplash.com/premium_photo-1681140029699-ee43ba816894?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=985&q=80");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .container {
+      display: grid;
+      justify-content: center;
+      align-content: center;
+      min-height: 100vh;
+      grid-template-columns: repeat(4, 100px);  
+      grid-template-rows:  minmax(120px, auto) repeat(5,100px);
+      grid-gap: 10px;
+      /* width: 300px; */
+      margin: auto;
+      /* background-color: #f1f1f1; */
+    }
+
+    .result {
+      /* grid-column: 1 / span 4; */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: flex-end;
+      word-wrap: break-word;
+      word-break: break-all; 
+      grid-column:1/-1;
+      color: white;
       padding: 10px;
-      text-align: right;
-      background-color: #fff;   
+      /* text-align: right; */
+      outline: none;
+      background-color: #262121;   
+    }
+    
+    .result .previous-operand {
+    color: rgba(255, 255, 255, .75);
+    font-size: 1.5rem;
+    }
+
+    .result .current-operand {
+    color: white;
+    font-size: 2.5rem;
     }
 
     .AC {
@@ -34,13 +72,21 @@
 
     .equal {
         grid-column: 3 / span 2;
-
     }
 
     input[type="button"] {
+      cursor: pointer;
       width: 100%;
       padding: 10px;
       margin-bottom: 5px;
+      font-size: 2rem;
+        border: 1px solid white;
+        outline: none;
+        background-color: rgba(255, 255, 255, .75);
+    }
+    
+    input[type="button"]:hover {
+        background-color: rgba(255, 255, 255, .9);
     }
 
 
@@ -48,11 +94,13 @@
 </head>
 <body>
   <div class="container">
-        <input type="text" id="result" readonly>
-
+        <div class="result"> 
+            <div class="previous-operand"></div>
+            <div class="current-operand"></div>
+        </div>
         <input type="button" class="AC" value="AC" onclick="clearResult()">
-        <input type="button" value="DEL" onclick="clearResult()">
-        <input type="button" value="&divide" onclick="addToResult('/')">
+        <input type="button" value="DEL" onclick="deleteResult()">
+        <input type="button" value="&divide" onclick="addToResult('&divide')">
 
         <input type="button" value="1" onclick="addToResult('1')">
         <input type="button" value="2" onclick="addToResult('2')">
@@ -77,23 +125,42 @@
 
   <script>
     function addToResult(value) {
-      document.getElementById('result').value += value;
+      const result = document.querySelector('.current-operand').innerHTML;
+      if ( value === '.' && result.includes('.')) return;
+      document.querySelector('.current-operand').innerHTML +=value;
     }
-
+    // function addToResult(value) {
+    //   document.querySelector('.current-operand').innerHTML += value;
+    // }
     function calculate() {
+        
       try {
-        const result = eval(document.getElementById('result').value);
-        document.getElementById('result').value = result;
+        let expression = document.querySelector('.current-operand').innerHTML;
+        // console.log(expression);
+
+        if (expression.includes('÷')){
+            console.log(expression);
+            expression = expression.replace('÷', '/');
+        }
+        // const result = eval(document.querySelector('.current-operand').innerHTML);
+        const result = eval(expression);
+        document.querySelector('.current-operand').innerHTML = result;
       } catch (error) {
-        document.getElementById('result').value = 'Error';
+        document.querySelector('.current-operand').innerHTML = 'Error';
       }
     }
 
     function clearResult() {
-      document.getElementById('result').value = '';
+      document.querySelector('.current-operand').innerHTML = '';
+    }
+
+    function deleteResult() {
+        const preResult = document.querySelector('.current-operand').innerHTML;
+        const delResult = preResult.slice(0, preResult.length-1); 
+        document.querySelector('.current-operand').innerHTML = delResult;
     }
   </script>
-</body>
+</body>s
 </html>
 
     
